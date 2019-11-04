@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dog App 3</title>
+
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <h1>Generate Random Dog Photos By Breed!</h1>
+    <p>Generate a specified number of dog photos by breed. Using the form below insert a breed name and anumber between 1 and 50; sit back and watch the magic happen.</p>
+
+    <form action="" class="dogImageForm">
+        <div class="dogImageInputContainer">
+            <label for="dogs">Enter Number Of Dogs:</label>
+            <input type="number" class="dogImageInput" name="dogs" id="dogs" value="3" min="1" max="50" required>
+        </div>
+        <div class="dogImgeInputContainer">
+            <button type="submit">Generate Photos!</button>
+        </div>
+    </form>
+
+    <section class="dogImageContainer hidden"></section>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+</body>
+</html>
