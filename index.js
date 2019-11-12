@@ -2,21 +2,27 @@
 
 function getDogImages(breed){
     fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
-        .then(response => {
-            if (!response.ok) { throw new Error() };
-        
-            return response.json()
+        .then(res => {
+            debugger;
+            if (!res.ok) {
+                //throw new Error(res)
+                throw res;
+            };
+
+            return res.json();
         })
-        .then(responseJSON => {
+        .then(resJSON => {
             $('.dogImageContainer')
             .html(
-                `<img src="${responseJSON.message}" class='dogImage'>`
+                `<img src="${resJSON.message}" class='dogImage'>`
             )
             .removeClass('hidden');
         })
         .catch(error => {
+            debugger;
             error.json().then(res => {
-                $('.dogImageContainer').html(`<p>${res.message}</p>`)
+                $('.dogImageContainer').html(`<p>${res.message}; please try again.</p>`)
+                .removeClass('hidden');
             })
         })
 }
