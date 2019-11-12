@@ -1,3 +1,7 @@
 .hidden {
     display: none;
 }
+
+.dogImageContainer p {
+    color: red;
+}

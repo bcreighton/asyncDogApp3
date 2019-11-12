@@ -1,25 +1,24 @@
 'use strict';
 
-function getDogImages(breed, dogs){
-    fetch(`https://dog.ceo/api/breed/${breed}/images/random/${dogs}`)
-        .then(response => response.json())
-        .then(responseJSON => {
-            if(responseJSON.status == 'error'){
-                $('.dogImageContainer').replaceWith(
-                    `<p>${breed} does not exist; please refresh the page and try again.</p>`
-                 )
-            } else {
-                const dogImages = responseJSON.message;
-
-                for(let i=0; i<dogImages.length; i++){
-                $('.dogImageContainer').append(
-                    `<img src="${dogImages[i]}" class='dogImage'>`
-                    )
-                }
-            }
+function getDogImages(breed){
+    fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
+        .then(response => {
+            if (!response.ok) { throw new Error() };
+        
+            return response.json()
         })
-        .then($('.dogImageContainer').removeClass('hidden'))
-        .catch(error => console.log('An error has occured; please try again.'))
+        .then(responseJSON => {
+            $('.dogImageContainer')
+            .html(
+                `<img src="${responseJSON.message}" class='dogImage'>`
+            )
+            .removeClass('hidden');
+        })
+        .catch(error => {
+            error.json().then(res => {
+                $('.dogImageContainer').html(`<p>${res.message}</p>`)
+            })
+        })
 }
 
 function formListener(){
@@ -27,8 +26,7 @@ function formListener(){
         event.preventDefault();
 
         const dogBreed = $('#breed').val();
-        const numberOfDogs = $('#dogs').val();
-        getDogImages(dogBreed, numberOfDogs);
+        getDogImages(dogBreed);
     });
 }
 
